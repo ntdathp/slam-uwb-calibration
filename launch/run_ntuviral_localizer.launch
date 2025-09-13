@@ -8,6 +8,12 @@
   <!-- a CSV file.                                                   -->
   <!-- ============================================================= -->
 
+  <!-- Root folder where the .bag files reside for all datasets -->
+  <arg name="data_path" default="/home/$(env USER)/catkin_ws/src/slam-uwb-calibration/data"/>
+
+  <!-- Root folder where CSV outputs will be written -->
+  <arg name="exp_log_dir" default="$(arg data_path)/odomInU"/>
+
   <!-- ====== Select Dataset (choose exactly one) ====== -->
   <!-- Uncomment the dataset you want to use; this determines       -->
   <!-- per-dataset anchor coordinates and bag file paths below.     -->
@@ -35,12 +41,6 @@
   <!-- <arg name="dataset" default="spms_01"/> -->
   <!-- <arg name="dataset" default="spms_02"/> -->
   <!-- <arg name="dataset" default="spms_03"/> -->
-
-  <!-- Root folder where the .bag files reside for all datasets -->
-  <arg name="data_path" default="/home/$(env USER)/catkin_ws/src/slam-uwb-calibration/data"/>
-
-  <!-- Root folder where CSV outputs will be written -->
-  <arg name="exp_log_dir" default="$arg data_path)/odomInU"/>
 
   <!-- ============================================================= -->
   <!-- Compute full paths to UWB and Odometry bag files from data_path -->
@@ -266,12 +266,12 @@
     <param name="uwb_csv_path"   value="$(arg uwb_csv_path)"/>
 
     <!-- Filter parameters -->
-    <param name="distance_error" value="0.3"/>
+    <param name="distance_error" value="0.5"/>
     <param name="window_size" value="50"/>
     <param name="cauchy_scale" value="0.5"/>
 
     <!-- Where to save the odm CSV -->
-    <param name="csv_write_enabled"         value="true"/>
+    <param name="csv_write_enabled"         value="false"/>
 
     <param name="csv_output_path"
          value="$(arg exp_log_dir)/$(arg dataset)_odomInU.csv"/>

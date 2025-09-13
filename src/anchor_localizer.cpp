@@ -20,6 +20,7 @@
 #include <unordered_map>
 #include <chrono>
 #include <sstream>
+#include <filesystem>
 
 // Eigen
 #include <Eigen/Dense>
@@ -548,7 +549,7 @@ private:
 
         // == Compute initial rotation matrix ==
         R0_init = Eigen::AngleAxisd(yaw0_init_rad, Eigen::Vector3d::UnitZ())
-                       .toRotationMatrix();
+                      .toRotationMatrix();
 
         // == Prepare propagation variables ==
         Eigen::Vector3d last_pU = pU_init;
@@ -591,7 +592,9 @@ private:
         // == Open CSV output if enabled ==
         std::ofstream ofs;
         if (csv_write_)
+        {
             ofs.open(csv_path);
+        }
         if (csv_write_)
             ofs << "time_ns,tx,ty,tz,qx,qy,qz,qw,run_time\n";
 

@@ -7,4 +7,4 @@ cauchy_scale: 0.5
 huber_delta: 0.5
 
 distance_error: 0.7
-write_csv: false     
+write_csv: false
