@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>slam-uwb-calibration</name>
+  <version>0.0.1</version>
+  <description>Package for calibrating UWB-based localization with Ceres Solver.</description>
+
+  <maintainer email="dat@todo.todo">dat</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Build dependencies -->
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>uwb_driver</build_depend>
+  <build_depend>rosbag</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+
+  <!-- Exported build dependencies -->
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <build_export_depend>nav_msgs</build_export_depend>
+  <build_export_depend>uwb_driver</build_export_depend>
+  <build_export_depend>geometry_msgs</build_export_depend>
+  
+
+  <!-- Runtime dependencies -->
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>uwb_driver</exec_depend>
+  <exec_depend>rosbag</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+
+  <!-- System dependencies -->
+  <depend>ceres-solver</depend>
+  <depend>eigen</depend>
+  <depend>pcl_conversions</depend>
+  <depend>pcl_ros</depend>
+
+  <export>
+    <build_type>catkin</build_type>
+  </export>
+</package>

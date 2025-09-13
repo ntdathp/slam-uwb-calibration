@@ -1,0 +1,313 @@
+<launch>
+
+  <!-- ====== General Arguments ====== -->
+  <arg name="data_path"     default="/home/$(env USER)/catkin_ws/src/slam-uwb-calibration/data"/>
+
+  <!-- ====== Dataset Selection ======
+       Uncomment exactly one line below to select the dataset -->
+  <arg name="dataset" default="eee_01"/>
+  <!-- <arg name="dataset" default="eee_02"/> -->
+  <!-- <arg name="dataset" default="eee_03"/> -->
+
+  <!-- <arg name="dataset" default="nya_01"/> -->
+  <!-- <arg name="dataset" default="nya_02"/> -->
+  <!-- <arg name="dataset" default="nya_03"/> -->
+
+  <!-- <arg name="dataset" default="sbs_01"/> -->
+  <!-- <arg name="dataset" default="sbs_02"/> -->
+  <!-- <arg name="dataset" default="sbs_03"/>   -->
+
+  <!-- <arg name="dataset" default="rtp_01"/> -->
+  <!-- <arg name="dataset" default="rtp_02"/>   -->
+  <!-- <arg name="dataset" default="rtp_03"/> -->
+
+  <!-- <arg name="dataset" default="tnp_01"/> -->
+  <!-- <arg name="dataset" default="tnp_02"/> -->
+  <!-- <arg name="dataset" default="tnp_03"/> -->
+
+  <!-- <arg name="dataset" default="spms_01"/> -->
+  <!-- <arg name="dataset" default="spms_02"/> -->
+  <!-- <arg name="dataset" default="spms_03"/> -->
+
+  <!-- ====== Paths auto-generated ====== -->
+
+  <!-- ====== Or using distance_filtered ====== -->
+  <arg name="csv_file"      default="$(arg data_path)/distance/$(arg dataset)_distance.csv"/>
+  <arg name="odom_csv_path" default="$(arg data_path)/opt_odom/$(arg dataset)_opt_odom.csv"/>
+
+  <!-- ====== Per-dataset anchor params ====== -->
+  <group if="$(eval arg('dataset')=='eee_01')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [-3.72124, -28.7192, 1.01887]
+        "101": [-2.91393, 12.8197, 0.741332]
+        "102": [9.80977, -5.1782, 1.12004]
+    </rosparam>    
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [41.749]  
+      "101_102": [27.176]  
+      "100_102": [22.150]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='eee_02')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [-28.7013, 4.11484, 0.604292]
+        "101": [12.8708, 2.84128, 1.18559]
+        "102": [-5.31207, -9.47426, 0.57638]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [41.749]  
+      "101_102": [27.176]  
+      "100_102": [22.150]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='eee_03')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100":  [2.24891, -28.4359, 1.09249]
+        "101":  [-4.41881, 12.37, 0.452298]
+        "102":  [11.394, -2.98462, 1.20438]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [41.749]  
+      "101_102": [27.176]  
+      "100_102": [22.150]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='nya_01')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [5.77234, -3.70162, 1.42171]
+        "101": [-8.37747, -1.71844, 1.0135]
+        "102": [2.52798, 8.63769, 1.14713]
+    </rosparam>
+     <rosparam param="anchor_distance_constraints">
+      "100_101": [14.727]  
+      "101_102": [13.088]  
+      "100_102": [15.077]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='nya_02')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [ 2.960197,  6.302725,  1.405024 ]
+        "101": [ 1.958476, -7.955574,  1.017486 ]
+        "102": [ -9.245361,  2.127497,  1.222435 ]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [14.727]  
+      "101_102": [13.088]  
+      "100_102": [15.077]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='nya_03')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [-2.69197, -7.4413, 1.05977]
+        "101": [-7.07059, 5.97042, 1.14766]
+        "102": [7.21706, 0.579101, 1.28607]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [14.727]  
+      "101_102": [13.088]  
+      "100_102": [15.077]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='sbs_01')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [8.19505, 20.1029, 1.17873]
+        "101": [10.8784, -11.0565, 1.23295]
+        "102": [-10.244, 4.04089, 0.962317]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [31.381]  
+      "101_102": [24.696]  
+      "100_102": [26.038]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='sbs_02')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [18.8793, 8.13624, 1.49459]
+        "101": [4.25837, -19.5698, 0.899664]
+        "102": [-5.3731, 4.56532, 1.28607]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [31.381]  
+      "101_102": [24.696]  
+      "100_102": [26.038]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='sbs_03')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [12.4991, 10.7469, 1.36797]
+        "101": [3.22296, -19.3062, 0.80392]
+        "102": [-10.7038, 2.59891, 1.03403]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [31.381]  
+      "101_102": [24.696]  
+      "100_102": [26.038]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='rtp_01')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [1.80205, 29.736, 1.65071]
+        "101": [1.07788, -13.614, 1.10407]
+        "102": [-7.8264, 12.4789, 0.983407]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [43.547]  
+      "101_102": [19.725]  
+      "100_102": [27.825]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='rtp_02')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [3.61066, 29.1282, 1.27127]
+        "101": [0.887878, -14.0788, 1.04316]
+        "102": [-7.06438, 12.3396, 1.22543]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [43.547]  
+      "101_102": [19.725]  
+      "100_102": [27.825]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='rtp_03')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [1.68274, 29.4235, 1.71119]
+        "101": [1.32258, -13.9057, 1.09953]
+        "102": [-7.92923, 12.08, 1.22529]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [43.547]  
+      "101_102": [19.725]  
+      "100_102": [27.825]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='tnp_01')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [5.34828, 15.7385, 1.0865]
+        "101": [6.92423, -11.588, 0.951858]
+        "102": [-4.88316, 0.820064, 0.954404]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [27.658]  
+      "101_102": [18.209]  
+      "100_102": [17.079]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='tnp_02')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100":  [-8.47496, -12.2411, 0.574395]
+        "101":  [-5.63434, 15.098, 0.808614]
+        "102":  [3.80965, 1.01251, 0.90984]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [27.658]  
+      "101_102": [18.209]  
+      "100_102": [17.079]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='tnp_03')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [1.67968, -12.1106, 1.01788]
+        "101": [-10.5524, 12.5068, 0.648309]
+        "102": [5.18713, 5.61337, 1.12622]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [27.658]  
+      "101_102": [18.209]  
+      "100_102": [17.079]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='spms_01')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [-22.1083, 10.8672, 1.7289]
+        "101": [14.7746, 11.0037, 1.99006]
+        "102": [-2.46209, -2.87745, 1.4702]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [36.906]  
+      "101_102": [24.112]  
+      "100_102": [22.225]  
+    </rosparam>
+  </group>
+
+  <group if="$(eval arg('dataset')=='spms_02')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100":  [8.01578, 22.0758, 2.28058]
+        "101": [10.1655, -14.6944, 1.69393]
+        "102": [-4.73276, 1.83746, 1.64472]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [36.906]  
+      "101_102": [24.112]  
+      "100_102": [22.225]  
+    </rosparam>
+  </group>
+
+   <group if="$(eval arg('dataset')=='spms_03')">
+    <rosparam ns="anchor_estimator_node">
+      initial_anchor_positions:
+        "100": [9.22598, 21.7236, 2.20723]
+        "101": [11.4253, -15.0395, 1.60283]
+        "102": [1.25518, 1.16336, 2.58773]
+    </rosparam>
+    <rosparam param="anchor_distance_constraints">
+      "100_101": [36.906]  
+      "101_102": [24.112]  
+      "100_102": [22.225]  
+    </rosparam>
+  </group> 
+
+
+  <!-- ====== UWB Calibration and Estimation Node ====== -->
+  <node name="anchor_estimator_node"
+        pkg="slam-uwb-calibration"
+        type="ANCHOR_ESTIMATOR_NODE"
+        output="screen">
+    <!-- load all other static params -->
+    <rosparam command="load" file="$(find slam-uwb-calibration)/param/anchor_estimator_params.yaml"/>
+
+    <!-- odom params -->
+    <param name="odom_csv_path"  value="$(arg odom_csv_path)"/>
+    <param name="odom_bag_topic" value="/opt_odom"/>
+
+
+    <param name="uwb_csv_path" value="$(arg csv_file)"/>
+    <param name="uwb_bag_topic" value="/uwb_endorange_info"/>
+    
+
+    <!-- Output CSV path: <dataset>_distance_filtered.csv -->
+    <param name="output_csv_path" value="$(arg data_path)/distance_filtered/$(arg dataset)_distance_filtered.csv"/>
+  </node>
+
+</launch>

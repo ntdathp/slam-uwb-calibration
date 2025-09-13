@@ -1,0 +1,279 @@
+<launch>
+  <!-- ============================================================= -->
+  <!-- Launch file for ANCHOR_LOCALIZER node only            -->
+  <!-- This node reads UWB ranges and odometry from bag files,      -->
+  <!-- applies antenna offsets and ranging biases, filters noisy     -->
+  <!-- measurements, trilaterates the 3D tag position, resolves the  -->
+  <!-- sign of z using interpolated odometry, and writes results to  -->
+  <!-- a CSV file.                                                   -->
+  <!-- ============================================================= -->
+
+  <!-- ====== Select Dataset (choose exactly one) ====== -->
+  <!-- Uncomment the dataset you want to use; this determines       -->
+  <!-- per-dataset anchor coordinates and bag file paths below.     -->
+
+  <!-- <arg name="dataset" default="eee_01"/> -->
+  <!-- <arg name="dataset" default="eee_02"/> -->
+  <!-- <arg name="dataset" default="eee_03"/> -->
+
+  <!-- <arg name="dataset" default="nya_01"/> -->
+  <arg name="dataset" default="nya_02"/>
+  <!-- <arg name="dataset" default="nya_03"/> -->
+
+  <!-- <arg name="dataset" default="sbs_01"/> -->
+  <!-- <arg name="dataset" default="sbs_02"/> -->
+  <!-- <arg name="dataset" default="sbs_03"/> -->
+
+  <!-- <arg name="dataset" default="rtp_01"/> -->
+  <!-- <arg name="dataset" default="rtp_02"/> -->
+  <!-- <arg name="dataset" default="rtp_03"/> -->
+
+  <!-- <arg name="dataset" default="tnp_01"/> -->
+  <!-- <arg name="dataset" default="tnp_02"/> -->
+  <!-- <arg name="dataset" default="tnp_03"/> -->
+
+  <!-- <arg name="dataset" default="spms_01"/> -->
+  <!-- <arg name="dataset" default="spms_02"/> -->
+  <!-- <arg name="dataset" default="spms_03"/> -->
+
+  <!-- Root folder where the .bag files reside for all datasets -->
+  <arg name="data_path" default="/home/$(env USER)/catkin_ws/src/slam-uwb-calibration/data"/>
+
+  <!-- Root folder where CSV outputs will be written -->
+  <arg name="exp_log_dir" default="$arg data_path)/odomInU"/>
+
+  <!-- ============================================================= -->
+  <!-- Compute full paths to UWB and Odometry bag files from data_path -->
+  <!-- ============================================================= -->
+
+  <arg name="uwb_bag_topic"  default="/uwb_endorange_info"/>
+  <arg name="odom_bag_topic" default="/opt_odom"/>
+  <arg name="odom_csv_path" default="$(arg data_path)/opt_odom/$(arg dataset)_opt_odom.csv"/>
+  <arg name="uwb_csv_path" default="$(arg data_path)/distance/$(arg dataset)_distance.csv"/>
+
+
+  <!-- ============================================================= -->
+  <!-- Per-dataset Anchor Positions (initial 3D coordinates)          -->
+  <!-- ============================================================= -->
+
+<!-- ============================================================= -->
+<group if="$(eval arg('dataset')=='eee_01')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [-3.682860, -28.744700, 1.397960]
+      "101": [-2.967370, 12.809300, 0.824449]
+      "102": [ 9.820790,  -5.199150, 1.391190]
+    yaw0_init_deg: 0.0
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='eee_02')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [-3.682860, -28.744700, 1.397960]
+      "101": [-2.967370, 12.809300, 0.824449]
+      "102": [ 9.820790,  -5.199150, 1.391190]
+    yaw0_init_deg: 90.73
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='eee_03')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [-3.682860, -28.744700, 1.397960]
+      "101": [-2.967370, 12.809300, 0.824449]
+      "102": [ 9.820790,  -5.199150, 1.391190]
+    yaw0_init_deg: -10.24
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='nya_01')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [ 5.862690,  -3.602890, 1.353340]
+      "101": [-8.434740,  -1.667750, 1.110050]
+      "102": [ 2.440840,   8.715780, 1.224210]
+    yaw0_init_deg: 0.0
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='nya_02')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [ 5.862690,  -3.602890, 1.353340]
+      "101": [-8.434740,  -1.667750, 1.110050]
+      "102": [ 2.440840,   8.715780, 1.224210]
+    yaw0_init_deg: -93.85
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='nya_03')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [ 5.862690,  -3.602890, 1.353340]
+      "101": [-8.434740,  -1.667750, 1.110050]
+      "102": [ 2.440840,   8.715780, 1.224210]
+    yaw0_init_deg: 64.89
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='rtp_01')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [ 1.739170,  29.752900, 1.703360]
+      "101": [ 1.094050, -13.656200, 1.135230]
+      "102": [-7.896960,  12.503800, 1.054570]
+    yaw0_init_deg: 0.0
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='rtp_02')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [ 1.739170,  29.752900, 1.703360]
+      "101": [ 1.094050, -13.656200, 1.135230]
+      "102": [-7.896960,  12.503800, 1.054570]
+    yaw0_init_deg: 2.67
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='rtp_03')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [ 1.739170,  29.752900, 1.703360]
+      "101": [ 1.094050, -13.656200, 1.135230]
+      "102": [-7.896960,  12.503800, 1.054570]
+    yaw0_init_deg: -0.43
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='sbs_01')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [  8.166200,  20.131900, 1.173020]
+      "101": [ 10.884300, -11.078100, 1.256830]
+      "102": [-10.249400,   4.040650, 0.934634]
+    yaw0_init_deg: 0.0
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='sbs_02')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [  8.166200,  20.131900, 1.173020]
+      "101": [ 10.884300, -11.078100, 1.256830]
+      "102": [-10.249400,   4.040650, 0.934634]
+    yaw0_init_deg: 32.75
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='sbs_03')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [  8.166200,  20.131900, 1.173020]
+      "101": [ 10.884300, -11.078100, 1.256830]
+      "102": [-10.249400,   4.040650, 0.934634]
+    yaw0_init_deg: 21.99
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='spms_01')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [-22.112200,  10.892600, 1.741060]
+      "101": [ 14.783800,  11.009300, 1.991900]
+      "102": [ -2.465690,  -2.911350, 1.466080]
+    yaw0_init_deg: 0.0
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='spms_02')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [-22.112200,  10.892600, 1.741060]
+      "101": [ 14.783800,  11.009300, 1.991900]
+      "102": [ -2.465690,  -2.911350, 1.466080]
+    yaw0_init_deg: 86.91
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='spms_03')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [-22.112200,  10.892600, 1.741060]
+      "101": [ 14.783800,  11.009300, 1.991900]
+      "102": [ -2.465690,  -2.911350, 1.466080]
+    yaw0_init_deg: 86.16
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='tnp_01')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [ 5.282930,  15.795900, 1.143780]
+      "101": [ 6.924720, -11.614300, 1.010970]
+      "102": [-4.890600,   0.806349, 0.955580]
+    yaw0_init_deg: 0.0
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='tnp_02')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [ 5.282930, 15.795900, 1.143780]
+      "101": [ 6.924720,-11.614300, 1.010970]
+      "102": [-4.890600,  0.806349, 0.955580]
+    yaw0_init_deg: -170.73
+  </rosparam>
+</group>
+
+<group if="$(eval arg('dataset')=='tnp_03')">
+  <rosparam ns="anchor_localizer_node">
+    initial_anchor_positions:
+      "100": [ 5.273100, 15.763600, 1.064650]
+      "101": [ 6.930000,-11.595400, 0.977193]
+      "102": [-4.880040,  0.816747, 0.952973]
+    yaw0_init_deg: 157.05
+  </rosparam>
+</group>
+<!-- ============================================================= -->
+
+
+  <!-- ============================================================= -->
+  <!-- Anchor offsets & biases (adjust as needed)                   -->
+  <!-- ============================================================= -->
+  <rosparam ns="anchor_localizer_node">
+    # Example antenna_offset: [tag_id, count, x1,y1,z1, x2,y2,z2, …]
+    antenna_offset: [200, 2,  0.0, -0.45, 0.0,   0.0, 0.45, 0.0,
+                     201, 2, -0.6,  0.45, 0.0,  -0.6, -0.45, 0.0]
+
+    # Example ranging_bias: [tag_id, bias, tag_id, bias, …]
+    ranging_bias: [200, -0.75,  201, -0.75]
+  </rosparam>
+
+  <!-- ============================================================= -->
+  <!-- anchor_localizer_node Configuration                   -->
+  <!-- ============================================================= -->
+  <node name="anchor_localizer_node"
+        pkg="slam-uwb-calibration"
+        type="ANCHOR_LOCALIZER_NODE"
+        output="screen">
+
+    <!-- Bag file paths and topics -->
+    <param name="uwb_bag_topic"  value="$(arg uwb_bag_topic)"/>
+    <param name="odom_bag_topic" value="$(arg odom_bag_topic)"/>
+    <param name="odom_csv_path"  value="$(arg odom_csv_path)"/>
+    <param name="uwb_csv_path"   value="$(arg uwb_csv_path)"/>
+
+    <!-- Filter parameters -->
+    <param name="distance_error" value="0.3"/>
+    <param name="window_size" value="50"/>
+    <param name="cauchy_scale" value="0.5"/>
+
+    <!-- Where to save the odm CSV -->
+    <param name="csv_write_enabled"         value="true"/>
+
+    <param name="csv_output_path"
+         value="$(arg exp_log_dir)/$(arg dataset)_odomInU.csv"/>
+  </node>
+</launch>
