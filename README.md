@@ -5,7 +5,7 @@ The details of slam-uwb-calibration are presented in this conference papers. Ple
 ```
 @inproceedings{nguyen2025slam-uwb-calibration,
   title         = {Coordinate-Consistent Localization via Continuous-Time Calibration and Fusion of UWB and SLAM Observations},
-  author        = {Nguyen, Tien-Dat and Nguyen, Thien-Minhl and Nguyen, Vinh-Hao},
+  author        = {Nguyen, Tien-Dat and Nguyen, Thien-Minh and Nguyen, Vinh-Hao},
   booktitle     = {}
   pages         = {1--6},
   year          = {2025},
