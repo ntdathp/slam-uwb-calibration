@@ -20,7 +20,6 @@
 #include <unordered_map>
 #include <chrono>
 #include <sstream>
-#include <filesystem>
 
 // Eigen
 #include <Eigen/Dense>
@@ -198,9 +197,10 @@ private:
             anchors_rot[i] = R * (anchors[i] - c) + c_rot;
 
         // ---------- 5. translate onto z=0 ----------
-        double z0 = (anchors_rot[0].z() + anchors_rot[1].z() + anchors_rot[2].z()) / 3.0;
+        z0 = (anchors_rot[0].z() + anchors_rot[1].z() + anchors_rot[2].z()) / 3.0;
         Eigen::Vector3d p(0.0, 0.0, -z0);
         z0 = -z0;
+        printf("z0 = %.4f \n", z0);
 
         // ---------- 6. store back ----------
         size_t idx = 0;
@@ -451,8 +451,8 @@ private:
         nh.param("uwb_bag_topic", topic, std::string());
         std::string uwb_csv_path;
         nh.param("uwb_csv_path", uwb_csv_path, std::string());
-        // rosbag::Bag bag(path, rosbag::bagmode::Read);
-        // rosbag::View view(bag, rosbag::TopicQuery(topic));
+        rosbag::Bag bag(path, rosbag::bagmode::Read);
+        rosbag::View view(bag, rosbag::TopicQuery(topic));
 
         if (!uwb_csv_path.empty())
         {
@@ -460,6 +460,13 @@ private:
             if (!uwb_msgs.empty())
                 return;
         }
+
+        // == Read raw UWB messages from bag ==
+        uwb_msgs.clear();
+        for (auto &m : view)
+            if (auto uw = m.instantiate<uwb_driver::UwbRange>())
+                uwb_msgs.push_back(uw);
+
 
         // == Log total number of UWB messages used ==
         ROS_INFO("UWB: using %zu raw messages from bag (no filtering applied)", uwb_msgs.size());
@@ -538,6 +545,8 @@ private:
 
         // == Extract and wrap results ==
         Eigen::Vector3d pU_init(final_x[0], final_x[1], z0);
+        ROS_INFO("  Pinit (%.4f, %.4f, %.4f)",  pU_init.x(), pU_init.y(), pU_init.z());
+
         yaw0_init_rad = wrapPI(final_x[2]);
         double yaw0_final_deg = yaw0_init_rad * 180.0 / M_PI;
 
@@ -549,7 +558,7 @@ private:
 
         // == Compute initial rotation matrix ==
         R0_init = Eigen::AngleAxisd(yaw0_init_rad, Eigen::Vector3d::UnitZ())
-                      .toRotationMatrix();
+                       .toRotationMatrix();
 
         // == Prepare propagation variables ==
         Eigen::Vector3d last_pU = pU_init;
@@ -592,9 +601,7 @@ private:
         // == Open CSV output if enabled ==
         std::ofstream ofs;
         if (csv_write_)
-        {
             ofs.open(csv_path);
-        }
         if (csv_write_)
             ofs << "time_ns,tx,ty,tz,qx,qy,qz,qw,run_time\n";
 
@@ -612,7 +619,6 @@ private:
             {
                 // == Predict new U pose from S pose ==
                 size_t base = 0;
-                // size_t base = start;
                 size_t idx_new = end - 1;
                 size_t idx_prev = idx_new - 1;
 

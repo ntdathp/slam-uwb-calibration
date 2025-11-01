@@ -29,7 +29,7 @@ And this work is tested with [NTU VIRAL](https://ntu-aris.github.io/ntu_viral_da
 }
 ``` -->
 
-Finally, we use [SLICT](https://github.com/brytsknguyen/slict) as the SLAM backend in this work.
+Finally, we use [SLICT](https://github.com/brytsknguyen/slict) as the SLAM method in this work.
 <!-- 
 ```
 @article{nguyen2023slict,
@@ -56,6 +56,10 @@ Finally, we use [SLICT](https://github.com/brytsknguyen/slict) as the SLAM backe
   doi={10.1109/LRA.2024.3391049}
 }
 ``` -->
+
+<p align="left">
+  <img src="media/uwb_showcase.gif" alt="Demo Animation" width="1000"/>
+</p>
 
 
 ## Prerequisites

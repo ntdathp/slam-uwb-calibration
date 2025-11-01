@@ -267,7 +267,7 @@
 
     <!-- Filter parameters -->
     <param name="distance_error" value="0.5"/>
-    <param name="window_size" value="50"/>
+    <param name="window_size" value="100"/>
     <param name="cauchy_scale" value="0.5"/>
 
     <!-- Where to save the odm CSV -->
