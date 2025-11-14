@@ -12,7 +12,7 @@ The details of slam-uwb-calibration are presented in this conference papers. Ple
   organization  = {DEE-HCMUT}
 }
 ```
-[arXiv](https://arxiv.org/abs/2510.05992)
+[arXiv](https://arxiv.org/abs/2510.05992) [IEEE Xplore](https://ieeexplore.ieee.org/document/11223429) 
 
 
 And this work is tested with [NTU VIRAL](https://ntu-aris.github.io/ntu_viral_dataset/) dataset. If you need **the estimated positions of the UWB anchors** for the dataset, you can find them at the end.
