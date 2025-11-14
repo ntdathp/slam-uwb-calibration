@@ -7,7 +7,7 @@ The details of slam-uwb-calibration are presented in this conference papers. Ple
   title         = {Coordinate-Consistent Localization via Continuous-Time Calibration and Fusion of UWB and SLAM Observations},
   author        = {Nguyen, Tien-Dat and Nguyen, Thien-Minh and Nguyen, Vinh-Hao},
   booktitle     = {The 2025 International Symposium on Electrical and Electronics Engineering (ISEE 2025)}
-  pages         = {1--6},
+  pages         = {107--112},
   year          = {2025},
   organization  = {DEE-HCMUT}
 }
