@@ -3,13 +3,14 @@ Coordinate-Consistent Localization via Continuous-Time Calibration and Fusion of
 The details of slam-uwb-calibration are presented in this conference papers. Please cite these works if you find slam-uwb-calibration useful:
 
 ```
-@inproceedings{nguyen2025slam-uwb-calibration,
-  title         = {Coordinate-Consistent Localization via Continuous-Time Calibration and Fusion of UWB and SLAM Observations},
-  author        = {Nguyen, Tien-Dat and Nguyen, Thien-Minh and Nguyen, Vinh-Hao},
-  booktitle     = {The 2025 International Symposium on Electrical and Electronics Engineering (ISEE 2025)}
-  pages         = {107--112},
-  year          = {2025},
-  organization  = {DEE-HCMUT}
+@inproceedings{nguyen2025coordinate,
+    title      = {Coordinate-Consistent Localization via Continuous-Time Calibration and Fusion of UWB and SLAM Observations},
+    author     = {Nguyen, Tien-Dat and Nguyen, Thien-Minh and Nguyen, Vinh-Hao},
+    year       = {2025},
+    booktitle  = {2025 International Symposium on Electrical and Electronics Engineering (ISEE)},
+    pages      = {107-112},
+    organization = {IEEE},
+    author+an  = {2=highlight}
 }
 ```
 [arXiv](https://arxiv.org/abs/2510.05992) [IEEE Xplore](https://ieeexplore.ieee.org/document/11223429) 
