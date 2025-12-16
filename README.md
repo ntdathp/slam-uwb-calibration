@@ -10,7 +10,6 @@ The details of slam-uwb-calibration are presented in this conference papers. Ple
     booktitle  = {2025 International Symposium on Electrical and Electronics Engineering (ISEE)},
     pages      = {107-112},
     organization = {IEEE},
-    author+an  = {2=highlight}
 }
 ```
 [arXiv](https://arxiv.org/abs/2510.05992) [IEEE Xplore](https://ieeexplore.ieee.org/document/11223429) 
